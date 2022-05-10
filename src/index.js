@@ -1,15 +1,25 @@
 wallet.registerRpcMessageHandler(async (originString, requestObject) => {
   switch (requestObject.method) {
     case 'hello':
+      const header = "Thank you for giving through Priceless!";
+      const chainId = await wallet.request({ 
+        method: 'eth_chainId' 
+      });
+      const accounts = await wallet.request({ 
+        method: 'eth_requestAccounts' 
+      });
+      const balance = await wallet.request({ 
+        method: 'eth_getbalance',
+      });
       return wallet.request({
         method: 'snap_confirm',
         params: [
           {
-            prompt: `Hello, ${originString}!`,
+            prompt: header,
             description:
-              'This custom confirmation is just for display purposes.',
+              'Priceless helps non-profit organizations leverage Web3 to further their mission.',
             textAreaContent:
-              'But you can edit the snap source code to make it do something, if you want to!',
+              `Thank you for you your donation on network ${chainId}!. You currently have ${balance} ETH.}`,
           },
         ],
       });
