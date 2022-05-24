@@ -8,9 +8,6 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
       const accounts = await wallet.request({ 
         method: 'eth_requestAccounts' 
       });
-      const balance = await wallet.request({ 
-        method: 'eth_getbalance',
-      });
       return wallet.request({
         method: 'snap_confirm',
         params: [
@@ -19,7 +16,7 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
             description:
               'Priceless helps non-profit organizations leverage Web3 to further their mission.',
             textAreaContent:
-              `Thank you for you your donation on network ${chainId}!. You currently have ${balance} ETH.}`,
+              `Thank you for you your donation on network ${chainId}!. You currently have ETH.}`,
           },
         ],
       });
